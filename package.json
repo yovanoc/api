@@ -1,60 +1,39 @@
 {
-  "name": "eway",
-  "version": "0.0.5",
-  "description": "NodeJS utilities",
+  "name": "api",
+  "version": "0.0.1",
+  "description": "NodeJS API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha",
-    "coverage": "nyc mocha",
-    "tinker": "ts-node tinker.ts",
+    "dev": "ts-node src/index.ts",
     "build": "tsc",
     "lint": "tslint -p . -t stylish",
     "lint:fix": "yarn lint --fix",
-    "lint:check": "tslint-config-prettier-check ./tslint.json",
-    "prepublishOnly": "yarn lint:fix && yarn build"
+    "lint:check": "tslint-config-prettier-check ./tslint.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yovanoc/eway.git"
+    "url": "git+https://github.com/yovanoc/api.git"
   },
   "author": "Christopher Yovanovitch <yovano_c@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yovanoc/eway/issues"
+    "url": "https://github.com/yovanoc/api/issues"
   },
-  "homepage": "https://github.com/yovanoc/eway#readme",
+  "homepage": "https://github.com/yovanoc/api#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/listr": "^0.13.0",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.9.4",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.0.1",
-    "sinon": "^6.3.1",
+    "@types/node": "^10.10.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.1.0-dev.20180914"
-  },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "exclude": [
-      "**/*.d.ts",
-      "coverage",
-      "dist",
-      "test",
-      "tinker.ts"
-    ],
-    "reporter": [
-      "html"
-    ],
-    "all": true
+    "typescript": "^3.0.3"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "graphql-yoga": "^1.16.2",
+    "pg": "^7.4.3",
+    "type-graphql": "^0.14.0",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.7",
+    "typeorm-typedi-extensions": "^0.2.1"
   }
 }
