@@ -1,5 +1,11 @@
 import { Field, Int, ObjectType } from "type-graphql";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from "typeorm";
 
 import { Lazy } from "../helpers";
 import { Recipe } from "./recipe";
@@ -11,18 +17,18 @@ export class Rate {
   @PrimaryGeneratedColumn()
   public readonly id!: number;
 
-  @Field(type => Int)
+  @Field(() => Int)
   @Column({ type: "int" })
   public value!: number;
 
-  @Field(type => User)
-  @ManyToOne(type => User, { lazy: true })
+  @Field(() => User)
+  @ManyToOne(() => User, { lazy: true })
   public user!: Lazy<User>;
 
   @Field()
   @CreateDateColumn()
   public date!: Date;
 
-  @ManyToOne(type => Recipe, { lazy: true })
+  @ManyToOne(() => Recipe, { lazy: true })
   public recipe!: Lazy<Recipe>;
 }

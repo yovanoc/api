@@ -30,7 +30,7 @@ async function bootstrap() {
       logger: "advanced-console",
       logging: "all",
       dropSchema: true,
-      cache: true,
+      cache: true
     });
 
     // seed database with some data
@@ -38,7 +38,7 @@ async function bootstrap() {
 
     // build TypeGraphQL executable schema
     const schema = await TypeGraphQL.buildSchema({
-      resolvers: [RecipeResolver],
+      resolvers: [RecipeResolver]
     });
 
     // create mocked context
@@ -51,14 +51,14 @@ async function bootstrap() {
     const serverOptions: Options = {
       port: 4000,
       endpoint: "/graphql",
-      playground: "/playground",
+      playground: "/playground"
     };
 
     // Start the server
     server.start(serverOptions, ({ port, playground }) => {
       // tslint:disable-next-line:no-console
       console.log(
-        `Server is running, GraphQL Playground available at http://localhost:${port}${playground}`,
+        `Server is running, GraphQL Playground available at http://localhost:${port}${playground}`
       );
     });
   } catch (err) {

@@ -2,9 +2,9 @@ import { Field, ID, InputType, Int } from "type-graphql";
 
 @InputType()
 export class RateInput {
-  @Field(type => ID)
+  @Field(() => ID)
   public recipeId: string = "";
 
-  @Field(type => Int)
+  @Field(() => Int)
   public value: number = 0;
 }

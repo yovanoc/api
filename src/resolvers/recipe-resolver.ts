@@ -11,34 +11,41 @@ import { RecipeInput } from "./types/recipe-input";
 @Resolver(Recipe)
 export class RecipeResolver {
   constructor(
-    @InjectRepository(Recipe) private readonly recipeRepository: Repository<Recipe>,
-    @InjectRepository(Rate) private readonly ratingsRepository: Repository<Rate>,
-  ) { }
+    @InjectRepository(Recipe)
+    private readonly recipeRepository: Repository<Recipe>,
+    @InjectRepository(Rate) private readonly ratingsRepository: Repository<Rate>
+  ) {}
 
-  @Query(returns => Recipe, { nullable: true })
+  @Query(() => Recipe, { nullable: true })
   public recipe(@Arg("recipeId", type => Int) recipeId: number) {
     return this.recipeRepository.findOne(recipeId);
   }
 
-  @Query(returns => [Recipe])
+  @Query(() => [Recipe])
   public recipes(): Promise<Recipe[]> {
     return this.recipeRepository.find();
   }
 
-  @Mutation(returns => Recipe)
-  public addRecipe(@Arg("recipe") recipeInput: RecipeInput, @Ctx() { user }: IContext): Promise<Recipe> {
+  @Mutation(() => Recipe)
+  public addRecipe(
+    @Arg("recipe") recipeInput: RecipeInput,
+    @Ctx() { user }: IContext
+  ): Promise<Recipe> {
     const recipe = this.recipeRepository.create({
       ...recipeInput,
-      author: user,
+      author: user
     });
     return this.recipeRepository.save(recipe);
   }
 
-  @Mutation(returns => Recipe)
-  public async rate(@Ctx() { user }: IContext, @Arg("rate") rateInput: RateInput): Promise<Recipe> {
+  @Mutation(() => Recipe)
+  public async rate(
+    @Ctx() { user }: IContext,
+    @Arg("rate") rateInput: RateInput
+  ): Promise<Recipe> {
     // find the recipe
     const recipe = await this.recipeRepository.findOne(rateInput.recipeId, {
-      relations: ["ratings"], // preload the relation as we will modify it
+      relations: ["ratings"] // preload the relation as we will modify it
     });
     if (!recipe) {
       throw new Error("Invalid recipe ID");
@@ -49,8 +56,8 @@ export class RecipeResolver {
       this.ratingsRepository.create({
         recipe,
         user,
-        value: rateInput.value,
-      }),
+        value: rateInput.value
+      })
     );
 
     // return updated recipe

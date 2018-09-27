@@ -7,7 +7,7 @@ import { Recipe } from "./recipe";
 @ObjectType()
 @Entity()
 export class User {
-  @Field(type => ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   public readonly id!: number;
 
@@ -22,7 +22,7 @@ export class User {
   @Column()
   public password!: string;
 
-  @OneToMany(type => Recipe, recipe => recipe.author, { lazy: true })
-  @Field(type => [Recipe])
+  @OneToMany(() => Recipe, recipe => recipe.author, { lazy: true })
+  @Field(() => [Recipe])
   public recipes!: Lazy<Recipe[]>;
 }
